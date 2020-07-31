@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
     marginTop: StatusBarHeight,
     flex: 1,
     backgroundColor: "transparent",
+    justifyContent: "center",
   },
 });
