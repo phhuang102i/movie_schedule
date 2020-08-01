@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import styles from "../styles/TabStyle";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 class Toptab extends Component {
   state = {};
   render() {
     return (
       <View style={styles.toptab}>
-        <Text style={styles.toptab_text}>{"MovieTonight"}</Text>
+        <Icon name="redo-alt" size={30} color="black" />
       </View>
     );
   }
