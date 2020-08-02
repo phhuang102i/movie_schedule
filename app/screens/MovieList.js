@@ -10,9 +10,16 @@ import {
 } from "react-native";
 import styles from "../styles/ListStyle";
 import images from "../assets/image";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 class MovieList extends Component {
   state = {};
+
+  handlescroll(e) {
+    console.log(e.nativeEvent.contentOffset.y);
+  }
+
   render() {
     const data_list = [
       { image: images.p1 },
@@ -20,13 +27,18 @@ class MovieList extends Component {
       { image: images.p3 },
       { image: images.p4 },
     ];
+
     return (
       <FlatList
         contentContainerStyle={styles.background}
+        onScroll={this.handlescroll.bind(this)}
         data={data_list}
         renderItem={({ item, index }) => (
           <View style={styles.movieobj_container}>
-            <MoviePic imageurl={item.image} key={index} />
+            <View style={styles.movie_and_bar}>
+              <MoviePic imageurl={item.image} key={index} />
+              <Rightbar />
+            </View>
             <TimeList key={"time_" + index} />
           </View>
         )}
@@ -86,7 +98,25 @@ class TimeList extends Component {
       </View>
     );
 
-    return <View>{theater_list}</View>;
+    return <View style={styles.schedule_container}>{theater_list}</View>;
+  }
+}
+
+class Rightbar extends Component {
+  state = {};
+  render() {
+    return (
+      <View style={styles.rightbar}>
+        <Icon name="youtube" size={40} color="red" style={styles.icon} />
+        <MaterialIcon
+          name="chat-bubble-outline"
+          size={40}
+          style={styles.icon}
+        />
+        <Icon name="imdb" size={40} color="lightcoral" style={styles.icon} />
+        <Icon name="readme" size={35} color="black" style={styles.icon} />
+      </View>
+    );
   }
 }
 

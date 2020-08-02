@@ -11,7 +11,6 @@
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/material-top-tabs": "^5.2.15",
     "@react-navigation/native": "^5.7.2",
-    "@expo/vector-icons": "Kaushald4/vector-icons#master",
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
     "react": "~16.11.0",

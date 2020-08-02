@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   screen: {
     //根據statusbar 要往下調整螢幕位置
     marginTop: StatusBarHeight,
-    flex: 1,
+    //flex: 1,
     backgroundColor: "transparent",
     justifyContent: "center",
   },
