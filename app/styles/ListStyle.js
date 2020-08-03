@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     //flex: 1,
     //justifyContent: "center",
     //alignItems: "center",
-    marginTop: 50,
+    //paddingVertical: 50,
     borderColor: "black",
     borderWidth: 10,
   },
@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   },
   movieobj_container: {
     flex: 1,
-    borderColor: "red",
-    borderWidth: 1,
+    //borderColor: "red",
+    //borderWidth: 1,
     //alignItems: "center",
     //justifyContent: "center",
   },
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   timelist_container: {
     flexDirection: "row",
+    justifyContent: "center",
   },
   time_button: {
     backgroundColor: "dimgray",
@@ -46,7 +47,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   schedule_container: {
-    alignSelf: "center",
+    alignItems: "center",
+    paddingBottom: 10,
+    borderColor: "black",
+    flex: 1,
+    borderTopWidth: 3,
+    borderBottomWidth: 3,
   },
   movie_and_bar: {
     flexDirection: "row",

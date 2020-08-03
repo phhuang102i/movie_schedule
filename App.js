@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MovieList from "./app/screens/MovieList";
 import { StatusBarHeight } from "./app/styles/StatusBar";
 import { NavigationContainer } from "@react-navigation/native";
 import Toptab from "./app/components/Toptab";
+import Bottomtab from "./app/components/Bottomtab";
 
 export default function App() {
   return (
     <View style={styles.screen}>
-      <Toptab />
+      <Toptab style={{ position: "absolute", top: 0 }} />
       <MovieList />
+      <Bottomtab />
     </View>
     /*<NavigationContainer>
       <Tabs />

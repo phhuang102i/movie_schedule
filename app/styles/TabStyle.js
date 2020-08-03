@@ -12,8 +12,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingLeft: 10,
     paddingRight: 15,
-    position: "absolute",
-    top: 0,
   },
   toptab_text: {
     color: "black",
@@ -24,6 +22,11 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     resizeMode: "contain",
+  },
+  bottomtab: {
+    backgroundColor: "black",
+    width: "100%",
+    height: 48,
   },
 });
 export default styles;

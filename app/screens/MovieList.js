@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import {
   ScrollView,
   View,
@@ -13,46 +13,57 @@ import images from "../assets/image";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
-class MovieList extends Component {
-  state = {};
+export default function MovieList(props) {
+  const data_list = [
+    { image: images.p1 },
+    { image: images.p2 },
+    { image: images.p3 },
+    { image: images.p4 },
+  ];
+  const [data, setData] = useState(0);
 
-  handlescroll(e) {
-    console.log(e.nativeEvent.contentOffset.y);
+  function gettodaymovie() {
+    const city = encodeURIComponent(props.city);
+    //const movie_name = this.state.movie_name?encodeURIComponent(this.state.movie_name):"";
+    fetch(`http://localhost:8000/movies/movie-today/?city=28&movie_name=`)
+      .then((response) => {
+        if (response.status > 400) {
+          console.log("something went wrong");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setData(data);
+      });
+    //console.log("OUO!!");
   }
+  useEffect(() => {
+    gettodaymovie();
+  }, []);
 
-  render() {
-    const data_list = [
-      { image: images.p1 },
-      { image: images.p2 },
-      { image: images.p3 },
-      { image: images.p4 },
-    ];
-
-    return (
-      <FlatList
-        contentContainerStyle={styles.background}
-        onScroll={this.handlescroll.bind(this)}
-        data={data_list}
-        renderItem={({ item, index }) => (
-          <View style={styles.movieobj_container}>
-            <View style={styles.movie_and_bar}>
-              <MoviePic imageurl={item.image} key={index} />
-              <Rightbar />
-            </View>
-            <TimeList key={"time_" + index} />
+  return (
+    <FlatList
+      contentContainerStyle={styles.background}
+      onScroll={props.getypos}
+      data={data_list}
+      renderItem={({ item, index }) => (
+        <View style={styles.movieobj_container}>
+          <View style={styles.movie_and_bar}>
+            <MoviePic imageurl={item.image} key={index} />
+            <Rightbar />
           </View>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    );
-  }
+          <TimeList key={"time_" + index} />
+        </View>
+      )}
+      keyExtractor={(item, index) => index.toString()}
+    />
+  );
 }
 
 class MoviePic extends Component {
   state = {};
   render() {
     const imageurl = this.props.imageurl;
-    console.log(imageurl);
     return <Image source={imageurl} style={styles.pic_container} />;
   }
 }
@@ -119,5 +130,3 @@ class Rightbar extends Component {
     );
   }
 }
-
-export default MovieList;
