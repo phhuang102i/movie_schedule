@@ -31,15 +31,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 10,
+    alignSelf: "center",
   },
   timelist_container: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "center",
   },
   time_button: {
     backgroundColor: "dimgray",
     borderRadius: 7,
-    marginHorizontal: 1,
+    margin: 1,
   },
   time_text: {
     color: "white",
