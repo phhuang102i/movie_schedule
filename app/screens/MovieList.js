@@ -26,7 +26,7 @@ export default function MovieList(props) {
     const city = encodeURIComponent(props.city);
     //const movie_name = this.state.movie_name?encodeURIComponent(this.state.movie_name):"";
     fetch(
-      `http://user-0dd3ee75.localhost.run/movies/movie-today/?city=28&movie_name=`
+      `http://mvschedule.nctu.me:55/movies/movie-today/?city=28&movie_name=`
     )
       .then((response) => {
         if (response.status > 400) {
@@ -73,7 +73,7 @@ class MoviePic extends Component {
   state = {};
   render() {
     const imageurl =
-      "http://user-0dd3ee75.localhost.run/static/" + this.props.imageurl;
+      "http://mvschedule.nctu.me:55/static/" + this.props.imageurl;
     return <Image source={{ uri: imageurl }} style={styles.pic_container} />;
   }
 }
