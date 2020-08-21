@@ -15,16 +15,7 @@ class Toptab extends Component {
           name="settings"
           size={30}
           color="black"
-          onPress={() =>
-            Popup.show({
-              type: "Success",
-              title: "Upload complete",
-              button: false,
-              textBody: "Congrats! Your upload successfully done",
-              buttontext: "Ok",
-              callback: () => Popup.hide(),
-            })
-          }
+          onPress={() => this.props.set_show_setting(true)}
         />
       </View>
     );

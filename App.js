@@ -5,17 +5,29 @@ import { StatusBarHeight } from "./app/styles/StatusBar";
 import { NavigationContainer } from "@react-navigation/native";
 import Toptab from "./app/components/Toptab";
 import Bottomtab from "./app/components/Bottomtab";
-import { Root } from "popup-ui";
+import SettingPopup from "./app/components/SettingPopup";
 
 export default function App() {
+  const [show_setting, set_show_setting] = useState(false);
+
   return (
-    <Root>
-      <View style={styles.screen}>
-        <Toptab style={{ position: "absolute", top: 0 }} />
-        <MovieList />
-        <Bottomtab />
-      </View>
-    </Root>
+    <View style={styles.screen}>
+      <Toptab
+        style={{ position: "absolute", top: 0 }}
+        show_setting={show_setting}
+        set_show_setting={set_show_setting}
+      />
+      <MovieList
+        show_setting={show_setting}
+        set_show_setting={set_show_setting}
+      />
+      <SettingPopup
+        show_setting={show_setting}
+        set_show_setting={set_show_setting}
+      />
+      <Bottomtab />
+    </View>
+
     /*<NavigationContainer>
       <Tabs />
     </NavigationContainer>*/
