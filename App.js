@@ -9,6 +9,7 @@ import SettingPopup from "./app/components/SettingPopup";
 
 export default function App() {
   const [show_setting, set_show_setting] = useState(false);
+  const [city_setting, set_city] = useState(28); //city setting要可以被存入應用設定 不然每次都要改太怪ㄌ
 
   return (
     <View style={styles.screen}>
@@ -20,10 +21,13 @@ export default function App() {
       <MovieList
         show_setting={show_setting}
         set_show_setting={set_show_setting}
+        city_setting={city_setting}
       />
       <SettingPopup
         show_setting={show_setting}
         set_show_setting={set_show_setting}
+        city_setting={city_setting}
+        set_city={set_city}
       />
       <Bottomtab />
     </View>

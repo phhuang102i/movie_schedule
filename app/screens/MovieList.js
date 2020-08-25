@@ -23,10 +23,10 @@ export default function MovieList(props) {
   const [data, setData] = useState(0);
 
   function gettodaymovie() {
-    const city = encodeURIComponent(props.city);
+    const city = encodeURIComponent(props.city_setting);
     //const movie_name = this.state.movie_name?encodeURIComponent(this.state.movie_name):"";
     fetch(
-      `http://mvschedule.nctu.me:55/movies/movie-today/?city=28&movie_name=`
+      `http://mvschedule.nctu.me:55/movies/movie-today/?city=${city}&movie_name=`
     )
       .then((response) => {
         if (response.status > 400) {
@@ -48,7 +48,7 @@ export default function MovieList(props) {
   }
   useEffect(() => {
     gettodaymovie();
-  }, []);
+  }, [props.city_setting]);
 
   return (
     <FlatList
