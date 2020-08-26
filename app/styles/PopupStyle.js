@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "50%",
   },
+  detail_container: {
+    width: "80%",
+    height: "80%",
+  },
   content_container: {
     alignItems: "center",
 

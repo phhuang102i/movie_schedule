@@ -12,6 +12,7 @@ import styles from "../styles/ListStyle";
 import images from "../assets/image";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import AppLink from "react-native-app-link";
 
 export default function MovieList(props) {
   const data_list = [
@@ -59,7 +60,12 @@ export default function MovieList(props) {
         <View style={styles.movieobj_container}>
           <View style={styles.movie_and_bar}>
             <MoviePic imageurl={item.image_url} key={index} />
-            <Rightbar />
+            <Rightbar
+              ytlink={item.intro_video}
+              intro={item.intro}
+              set_movie_detail={props.set_movie_detail}
+              set_show_detail={props.set_show_detail}
+            />
           </View>
           <TimeList key={"time_" + index} datedata={item.date_data} />
         </View>
@@ -110,17 +116,49 @@ class TimeList extends Component {
 
 class Rightbar extends Component {
   state = {};
+
   render() {
+    var ytlink = this.props ? this.props.ytlink : "https://youtube.com";
+    var intro = this.props ? this.props.intro : "";
     return (
       <View style={styles.rightbar}>
-        <Icon name="youtube" size={40} color="red" style={styles.icon} />
+        <Icon
+          name="youtube"
+          size={40}
+          color="red"
+          style={styles.icon}
+          onPress={
+            () =>
+              AppLink.maybeOpenURL(ytlink, {
+                appName: "youtube",
+                appStoreId: "",
+                appStoreLocale: "",
+                playStoreId: "",
+              })
+            /*.then(() => {
+                console.log("url found");
+              })
+              .catch((err) => {
+                console.log("error app not installed");
+              })*/
+          }
+        />
         <MaterialIcon
           name="chat-bubble-outline"
           size={40}
           style={styles.icon}
         />
         <Icon name="imdb" size={40} color="lightcoral" style={styles.icon} />
-        <Icon name="readme" size={35} color="black" style={styles.icon} />
+        <Icon
+          name="readme"
+          size={35}
+          color="black"
+          style={styles.icon}
+          onPress={() => {
+            this.props.set_movie_detail(intro);
+            this.props.set_show_detail(true);
+          }}
+        />
       </View>
     );
   }
