@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Dialog, {
   DialogContent,
   DialogTitle,
@@ -18,9 +18,15 @@ export default function DetailPopup(props) {
       onTouchOutside={() => {
         props.set_show_detail(false);
       }}
+      onHardwareBackPress={() => {
+        props.set_show_detail(false);
+        return true;
+      }}
     >
       <DialogContent>
-        <Text>{props.movie_detail}</Text>
+        <ScrollView>
+          <Text style={styles.detail_text}>{props.movie_detail}</Text>
+        </ScrollView>
       </DialogContent>
     </Dialog>
   );

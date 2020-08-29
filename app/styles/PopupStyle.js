@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "80%",
   },
+  detail_text: {
+    paddingVertical: 50,
+    fontSize: 20,
+  },
+
   content_container: {
     alignItems: "center",
 

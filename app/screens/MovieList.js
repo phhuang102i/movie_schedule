@@ -7,11 +7,13 @@ import {
   FlatList,
   Text,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import styles from "../styles/ListStyle";
 import images from "../assets/image";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import AppLink from "react-native-app-link";
 
 export default function MovieList(props) {
@@ -63,6 +65,7 @@ export default function MovieList(props) {
             <Rightbar
               ytlink={item.intro_video}
               intro={item.intro}
+              imdb={item.imdb}
               set_movie_detail={props.set_movie_detail}
               set_show_detail={props.set_show_detail}
             />
@@ -115,11 +118,34 @@ class TimeList extends Component {
 }
 
 class Rightbar extends Component {
-  state = {};
+  state = {
+    showIMDb: false,
+  };
 
   render() {
     var ytlink = this.props ? this.props.ytlink : "https://youtube.com";
     var intro = this.props ? this.props.intro : "";
+    var imdb_score = this.props ? this.props.imdb : "?";
+    var score_number = isNaN(Number(imdb_score)) ? 0 : Number(imdb_score);
+    let score_color = "black";
+
+    switch (true) {
+      case score_number >= 8:
+        score_color = "gold";
+        break;
+      case score_number >= 7:
+        score_color = "crimson";
+        break;
+      case score_number >= 6:
+        score_color = "forestgreen";
+        break;
+      case score_number >= 5:
+        score_color = "deepskyblue";
+        break;
+      default:
+        break;
+    }
+
     return (
       <View style={styles.rightbar}>
         <Icon
@@ -148,7 +174,32 @@ class Rightbar extends Component {
           size={40}
           style={styles.icon}
         />
-        <Icon name="imdb" size={40} color="lightcoral" style={styles.icon} />
+        {!this.state.showIMDb ? (
+          <Icon
+            name="imdb"
+            size={40}
+            color="lightcoral"
+            style={styles.icon}
+            onPress={() => {
+              this.setState({ showIMDb: true });
+            }}
+          />
+        ) : (
+          <TouchableOpacity
+            style={styles.imdb_container}
+            onPress={() => {
+              this.setState({ showIMDb: false });
+            }}
+          >
+            <MaterialCommunityIcon
+              name="circle"
+              size={45}
+              color={score_color}
+              style={styles.icon}
+            />
+            <Text style={styles.score}>{imdb_score}</Text>
+          </TouchableOpacity>
+        )}
         <Icon
           name="readme"
           size={35}

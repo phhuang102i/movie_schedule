@@ -28,6 +28,10 @@ export default function SettingPopup(props) {
       }}
       dialogTitle={<DialogTitle title="設定" />}
       dialogStyle={styles.dialog}
+      onHardwareBackPress={() => {
+        props.set_show_setting(false);
+        return true;
+      }}
       footer={
         <DialogFooter>
           <DialogButton

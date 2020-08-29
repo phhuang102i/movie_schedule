@@ -66,10 +66,19 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderLeftWidth: 2,
   },
+  imdb_container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   icon: {
     borderBottomColor: "black",
     borderBottomWidth: 2,
     marginVertical: 5,
+  },
+  score: {
+    position: "absolute",
+    fontWeight: "bold",
+    color: "white",
   },
 });
 

@@ -10,7 +10,7 @@ class Toptab extends Component {
   render() {
     return (
       <View style={styles.toptab}>
-        <Icon name="redo-alt" size={26} color="black" />
+        <Icon name="search" size={26} color="black" />
         <MaterialIcon
           name="settings"
           size={30}
