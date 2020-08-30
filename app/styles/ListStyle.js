@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderColor: "black",
     flex: 1,
-    borderTopWidth: 3,
-    borderBottomWidth: 3,
+    borderTopWidth: 2,
+    //borderBottomWidth: 3,
   },
   movie_and_bar: {
     flexDirection: "row",
@@ -79,6 +79,26 @@ const styles = StyleSheet.create({
     position: "absolute",
     fontWeight: "bold",
     color: "white",
+  },
+  timelistdropdown: {
+    width: "100%",
+    height: 25,
+    backgroundColor: "linen",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderTopColor: "black",
+    borderBottomColor: "black",
+  },
+  timelistdropdown_text: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  noschedule_text: {
+    fontWeight: "bold",
+    fontSize: 15,
   },
 });
 

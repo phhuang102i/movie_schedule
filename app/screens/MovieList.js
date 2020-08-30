@@ -15,6 +15,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import AppLink from "react-native-app-link";
+import Collapsible from "react-native-collapsible";
 
 export default function MovieList(props) {
   const data_list = [
@@ -24,6 +25,11 @@ export default function MovieList(props) {
     { image: images.p4 },
   ];
   const [data, setData] = useState(0);
+  const flatListRef = React.useRef();
+  const ScrollToTop = () => {
+    // use current
+    flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+  };
 
   function gettodaymovie() {
     const city = encodeURIComponent(props.city_setting);
@@ -51,10 +57,12 @@ export default function MovieList(props) {
   }
   useEffect(() => {
     gettodaymovie();
+    ScrollToTop();
   }, [props.city_setting]);
 
   return (
     <FlatList
+      ref={flatListRef}
       contentContainerStyle={styles.background}
       onScroll={props.getypos}
       data={data}
@@ -88,7 +96,9 @@ class MoviePic extends Component {
 }
 
 class TimeList extends Component {
-  state = {};
+  state = {
+    isfold: true,
+  };
   render() {
     var datelist = this.props ? this.props.datedata.datelist : [];
     let theater_list = [];
@@ -111,9 +121,44 @@ class TimeList extends Component {
           </View>
         ); //theater_name and timelist
     }
+
     //if not theaterlist 給一個 今日已無場次
 
-    return <View style={styles.schedule_container}>{theater_list}</View>;
+    return (
+      <View>
+        {this.state.isfold ? (
+          <TouchableOpacity
+            style={styles.timelistdropdown}
+            onPress={() => {
+              this.setState({ isfold: false });
+            }}
+          >
+            <Text style={styles.timelistdropdown_text}>時刻表 </Text>
+            <Icon name="angle-double-down" size={25} color="lightblue" />
+          </TouchableOpacity>
+        ) : null}
+        <Collapsible collapsed={this.state.isfold}>
+          <View style={styles.schedule_container}>
+            {theater_list.length > 0 ? (
+              theater_list
+            ) : (
+              <Text style={styles.noschedule_text}>本日已無場次</Text>
+            )}
+          </View>
+        </Collapsible>
+        {!this.state.isfold ? (
+          <TouchableOpacity
+            style={styles.timelistdropdown}
+            onPress={() => {
+              this.setState({ isfold: true });
+            }}
+          >
+            <Text style={styles.timelistdropdown_text}>收起 </Text>
+            <Icon name="angle-double-up" size={25} color="lightblue" />
+          </TouchableOpacity>
+        ) : null}
+      </View>
+    );
   }
 }
 
