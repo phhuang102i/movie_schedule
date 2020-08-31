@@ -63,6 +63,10 @@ export default function MovieList(props) {
   return (
     <FlatList
       ref={flatListRef}
+      onRefresh={() => {
+        gettodaymovie();
+      }}
+      refreshing={false}
       contentContainerStyle={styles.background}
       onScroll={props.getypos}
       data={data}
