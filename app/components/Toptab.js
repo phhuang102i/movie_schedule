@@ -10,7 +10,12 @@ class Toptab extends Component {
   render() {
     return (
       <View style={styles.toptab}>
-        <Icon name="search" size={26} color="black" />
+        <Icon
+          name="search"
+          size={26}
+          color="black"
+          onPress={() => this.props.set_show_search(true)}
+        />
         <MaterialIcon
           name="settings"
           size={30}

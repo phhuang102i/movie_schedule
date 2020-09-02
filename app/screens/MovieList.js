@@ -6,7 +6,6 @@ import {
   Image,
   FlatList,
   Text,
-  TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
 import styles from "../styles/ListStyle";

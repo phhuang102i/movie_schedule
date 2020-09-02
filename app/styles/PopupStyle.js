@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
   select_container: {
     flexDirection: "row",
+    marginVertical: 10,
   },
   placeholdertext: {
     fontSize: 20,
