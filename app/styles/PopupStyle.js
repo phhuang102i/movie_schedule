@@ -43,5 +43,23 @@ const styles = StyleSheet.create({
   selectedtext: {
     fontSize: 20,
   },
+  search_confirm_button: {
+    borderTopWidth: 0.5,
+    borderColor: "darkblue",
+  },
+  search_footer: {
+    height: 50,
+    paddingBottom: 8,
+  },
+  text_inputbox: {
+    fontSize: 15,
+    textAlign: "center",
+    flex: 0.7,
+    height: 50,
+    alignItems: "center",
+    borderWidth: 0.5,
+    borderColor: "darkblue",
+    borderRadius: 5,
+  },
 });
 export default styles;

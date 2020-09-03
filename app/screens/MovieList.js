@@ -32,9 +32,10 @@ export default function MovieList(props) {
 
   function gettodaymovie() {
     const city = encodeURIComponent(props.city_setting);
-    //const movie_name = this.state.movie_name?encodeURIComponent(this.state.movie_name):"";
+    const movie_name = encodeURIComponent(props.search_fields.name);
+
     fetch(
-      `http://mvschedule.nctu.me:55/movies/movie-today/?city=${city}&movie_name=`
+      `http://mvschedule.nctu.me:55/movies/movie-today/?city=${city}&movie_name=${movie_name}`
     )
       .then((response) => {
         if (response.status > 400) {
@@ -44,6 +45,10 @@ export default function MovieList(props) {
       })
       .then((data) => {
         setData(data);
+        props.set_search_fields({
+          name: "",
+          upduration: "",
+        });
       })
       .catch(function (error) {
         alert(
@@ -58,6 +63,12 @@ export default function MovieList(props) {
     gettodaymovie();
     ScrollToTop();
   }, [props.city_setting]);
+  useEffect(() => {
+    if (props.search_fields.name || props.search_fields.upduration) {
+      gettodaymovie();
+      ScrollToTop();
+    }
+  }, [props.search_fields]);
 
   return (
     <FlatList

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     //paddingVertical: 50,
     borderColor: "black",
     borderWidth: 10,
+    flexGrow: 1,
   },
   pic_container: {
     width: picsize.width,

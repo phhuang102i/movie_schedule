@@ -30,10 +30,11 @@ export default function App() {
       />
       <MovieList
         show_setting={show_setting}
-        set_show_setting={set_show_setting}
         city_setting={city_setting}
         set_movie_detail={set_movie_detail}
         set_show_detail={set_show_detail}
+        search_fields={search_fields}
+        set_search_fields={set_search_fields}
       />
       <SettingPopup
         show_setting={show_setting}
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
     //根據statusbar 要往下調整螢幕位置
     marginTop: StatusBarHeight,
     //flex: 1,
+    //flexGrow: 1,
     backgroundColor: "transparent",
     justifyContent: "center",
   },

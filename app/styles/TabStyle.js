@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   bottomtab: {
     backgroundColor: "black",
-    width: "100%",
+    alignSelf: "stretch",
     height: 48,
   },
 });
