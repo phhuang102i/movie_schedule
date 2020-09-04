@@ -20,6 +20,10 @@
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
+    "android": {
+      "package": "com.howz10927.mvscheduleTW",
+      "versionCode": 1
+    },
     "description": "Tonight's movie schedule TW"
   }
 }
