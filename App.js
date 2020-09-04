@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import MovieList from "./app/screens/MovieList";
 import { StatusBarHeight } from "./app/styles/StatusBar";
 import { NavigationContainer } from "@react-navigation/native";
@@ -19,6 +19,22 @@ export default function App() {
     name: "",
     upduration: "",
   });
+
+  const readData = async () => {
+    try {
+      const city_value = await AsyncStorage.getItem("city_setting");
+      if (city_value !== null) {
+        // We have data!!
+        set_city(city_value);
+      }
+    } catch (error) {
+      // Error retrieving data
+      //console.log(error);
+    }
+  };
+  useEffect(() => {
+    readData();
+  }, []);
 
   return (
     <View style={styles.screen}>

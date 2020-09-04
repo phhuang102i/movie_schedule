@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import Dialog, {
   DialogContent,
   DialogTitle,
@@ -19,6 +19,15 @@ export default function SettingPopup(props) {
       // key would be set to equal label if not included ^^
     );
   }
+  const saveData = async () => {
+    try {
+      await AsyncStorage.setItem("city_setting", tmp_city_option.toString());
+      // alert("Data successfully saved");
+      //console.log(tmp_city_option);
+    } catch (e) {
+      // alert("Failed to save the data to the storage");
+    }
+  };
 
   return (
     <Dialog
@@ -45,6 +54,7 @@ export default function SettingPopup(props) {
             onPress={() => {
               props.set_show_setting(false);
               props.set_city(tmp_city_option);
+              saveData();
             }}
           />
         </DialogFooter>
