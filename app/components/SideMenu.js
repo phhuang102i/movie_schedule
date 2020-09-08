@@ -34,7 +34,12 @@ class SideMenu extends Component {
           //this.props.set_show_menu(false);
           this.props.set_show_menu(false);
         }}
-        dialogTitle={<DialogTitle title="設定" style={{ height: 50 }} />}
+        dialogTitle={
+          <DialogTitle
+            title=""
+            style={{ height: 50, backgroundColor: "lightskyblue" }}
+          />
+        }
         dialogStyle={styles.menu}
         onHardwareBackPress={() => {
           this.props.set_show_menu(false);

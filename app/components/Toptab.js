@@ -17,18 +17,6 @@ class Toptab extends Component {
           color="black"
           onPress={() => this.props.set_show_menu(true)}
         />
-        <Icon
-          name="search"
-          size={26}
-          color="black"
-          onPress={() => this.props.set_show_search(true)}
-        />
-        <MaterialIcon
-          name="settings"
-          size={30}
-          color="black"
-          onPress={() => this.props.set_show_setting(true)}
-        />
       </View>
     );
   }
