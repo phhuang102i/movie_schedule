@@ -1,13 +1,13 @@
 import { StyleSheet, Dimensions, Text } from "react-native";
-import { StatusBarHeight } from "./StatusBar";
+import { StatusBarHeight, WindowHeight } from "./StatusBar";
 
 const styles = StyleSheet.create({
   menu: {
     backgroundColor: "white",
     width: "65%",
-    height: "100%",
+    height: WindowHeight,
     alignSelf: "flex-start",
-    marginTop: StatusBarHeight + 30,
+    marginTop: StatusBarHeight,
   },
   featurelist: {
     flexDirection: "row",

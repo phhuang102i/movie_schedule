@@ -11,6 +11,7 @@ import {
 import styles from "../styles/ListStyle";
 import images from "../assets/image";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import AppLink from "react-native-app-link";
@@ -33,9 +34,10 @@ export default function MovieList(props) {
   function gettodaymovie() {
     const city = encodeURIComponent(props.city_setting);
     const movie_name = encodeURIComponent(props.search_fields.name);
+    const up_date = encodeURIComponent(props.search_fields.upduration);
 
     fetch(
-      `http://mvschedule.nctu.me:55/movies/movie-today/?city=${city}&movie_name=${movie_name}`
+      `http://mvschedule.tk:55/movies/movie-today/?city=${city}&movie_name=${movie_name}&up_date=${up_date}`
     )
       .then((response) => {
         if (response.status > 400) {
@@ -103,8 +105,7 @@ export default function MovieList(props) {
 class MoviePic extends Component {
   state = {};
   render() {
-    const imageurl =
-      "http://mvschedule.nctu.me:55/static/" + this.props.imageurl;
+    const imageurl = "http://mvschedule.tk:55/static/" + this.props.imageurl;
     return <Image source={{ uri: imageurl }} style={styles.pic_container} />;
   }
 }
@@ -250,9 +251,9 @@ class Rightbar extends Component {
               this.setState({ showIMDb: false });
             }}
           >
-            <MaterialCommunityIcon
-              name="circle"
-              size={45}
+            <FontAwesome
+              name="square"
+              size={43}
               color={score_color}
               style={styles.icon}
             />

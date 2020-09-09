@@ -19,3 +19,6 @@ export const StatusBarHeight = Platform.select({
   android: StatusBar.currentHeight,
   default: 0,
 });
+
+export const WindowHeight = height;
+export const WindowWidth = width;
