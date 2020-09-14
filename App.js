@@ -13,7 +13,7 @@ import SideMenu from "./app/components/SideMenu";
 export default function App() {
   const [show_menu, set_show_menu] = useState(false);
   const [show_setting, set_show_setting] = useState(false);
-  const [city_setting, set_city] = useState(28); //city setting要可以被存入應用設定 不然每次都要改太怪ㄌ
+  const [city_setting, set_city] = useState(null); //city setting要可以被存入應用設定 不然每次都要改太怪ㄌ
   const [movie_detail, set_movie_detail] = useState("No data");
   const [show_detail, set_show_detail] = useState(false);
   const [show_search, set_show_search] = useState(false);
@@ -54,14 +54,16 @@ export default function App() {
         set_show_setting={set_show_setting}
         set_show_search={set_show_search}
       ></SideMenu>
-      <MovieList
-        show_setting={show_setting}
-        city_setting={city_setting}
-        set_movie_detail={set_movie_detail}
-        set_show_detail={set_show_detail}
-        search_fields={search_fields}
-        set_search_fields={set_search_fields}
-      />
+      {city_setting ? (
+        <MovieList
+          show_setting={show_setting}
+          city_setting={city_setting}
+          set_movie_detail={set_movie_detail}
+          set_show_detail={set_show_detail}
+          search_fields={search_fields}
+          set_search_fields={set_search_fields}
+        />
+      ) : null}
       <SettingPopup
         show_setting={show_setting}
         set_show_setting={set_show_setting}
