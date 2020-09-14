@@ -34,6 +34,7 @@ export default function App() {
       //console.log(error);
     }
   };
+
   useEffect(() => {
     readData();
   }, []);
