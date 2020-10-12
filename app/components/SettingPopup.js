@@ -12,7 +12,7 @@ import cities from "./FixedData";
 
 export default function SettingPopup(props) {
   let cityItems = [];
-  let tmp_city_option = 28;
+  let tmp_city_option = props ? props.city_setting : 28;
   for (let ctname in cities) {
     cityItems.push(
       <SelectPicker.Item label={String(ctname)} value={cities[ctname]} />

@@ -9,6 +9,7 @@ import SettingPopup from "./app/components/SettingPopup";
 import DetailPopup from "./app/components/DetailPopup";
 import SearchPopup from "./app/components/SearchPopup";
 import SideMenu from "./app/components/SideMenu";
+import Loading from "./app/screens/Loading";
 
 export default function App() {
   const [show_menu, set_show_menu] = useState(false);
@@ -36,6 +37,7 @@ export default function App() {
       //console.log(error);
     }
   };
+
   useEffect(() => {
     readData();
   }, []);
@@ -64,7 +66,9 @@ export default function App() {
           search_fields={search_fields}
           set_search_fields={set_search_fields}
         />
-      ) : null}
+      ) : (
+        <Loading />
+      )}
       <SettingPopup
         show_setting={show_setting}
         set_show_setting={set_show_setting}
