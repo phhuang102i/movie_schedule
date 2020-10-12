@@ -28,6 +28,8 @@ export default function App() {
       if (city_value !== null) {
         // We have data!!
         set_city(city_value);
+      } else {
+        set_city(28);
       }
     } catch (error) {
       // Error retrieving data
