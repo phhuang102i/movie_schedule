@@ -61,5 +61,42 @@ const styles = StyleSheet.create({
     borderColor: "darkblue",
     borderRadius: 5,
   },
+  comment_container: {
+    width: "90%",
+    height: "90%",
+  },
+  comment_row: {
+    borderColor: "grey",
+    borderWidth: 0.5,
+    flexDirection: "row",
+    height: 45,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  comment_link_from: {
+    flex: 1,
+    color: "white",
+    backgroundColor: "black",
+    textAlign: "center",
+    textAlignVertical: "center",
+    height: "95%",
+  },
+  comment_link_title: {
+    flex: 6,
+    marginLeft: 10,
+  },
+  comment_paging_container: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "flex-end",
+  },
+  page_box: {
+    marginLeft: 40,
+    marginBottom: 20,
+  },
+  page_text: {
+    fontWeight: "500",
+    fontSize: 20,
+  },
 });
 export default styles;
