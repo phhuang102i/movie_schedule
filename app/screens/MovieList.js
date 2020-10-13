@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useState, createContext } from "react";
 import {
   ScrollView,
   View,
@@ -92,6 +92,9 @@ export default function MovieList(props) {
               imdb={item.imdb}
               set_movie_detail={props.set_movie_detail}
               set_show_detail={props.set_show_detail}
+              set_show_comment={props.set_show_comment}
+              set_comment_target={props.set_comment_target}
+              name={item.name}
             />
           </View>
           <TimeList key={"time_" + index} datedata={item.date_data} />
@@ -233,6 +236,10 @@ class Rightbar extends Component {
           name="chat-bubble-outline"
           size={40}
           style={styles.icon}
+          onPress={() => {
+            this.props.set_comment_target(this.props.name);
+            this.props.set_show_comment(true);
+          }}
         />
         {!this.state.showIMDb ? (
           <Icon

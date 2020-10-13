@@ -17,13 +17,14 @@ export default function App() {
   const [show_setting, set_show_setting] = useState(false);
   const [city_setting, set_city] = useState(null); //city setting要可以被存入應用設定 不然每次都要改太怪了
   const [movie_detail, set_movie_detail] = useState("No data");
+  const [movie_name, set_movie_name] = useState("");
   const [show_detail, set_show_detail] = useState(false);
   const [show_search, set_show_search] = useState(false);
   const [search_fields, set_search_fields] = useState({
     name: "",
     upduration: "",
   });
-  const [show_comment, set_show_comment] = useState(true);
+  const [show_comment, set_show_comment] = useState(false);
 
   const readData = async () => {
     try {
@@ -67,6 +68,8 @@ export default function App() {
           set_show_detail={set_show_detail}
           search_fields={search_fields}
           set_search_fields={set_search_fields}
+          set_show_comment={set_show_comment}
+          set_comment_target={set_movie_name}
         />
       ) : (
         <Loading />
@@ -88,10 +91,13 @@ export default function App() {
         show_search={show_search}
         set_show_search={set_show_search}
       />
-      <Comments
-        set_show_comment={set_show_comment}
-        show_comment={show_comment}
-      />
+      {movie_name != "" ? (
+        <Comments
+          set_show_comment={set_show_comment}
+          show_comment={show_comment}
+          movie_name={movie_name}
+        />
+      ) : null}
       <Bottomtab />
     </View>
 
