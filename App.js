@@ -11,6 +11,7 @@ import SearchPopup from "./app/components/SearchPopup";
 import SideMenu from "./app/components/SideMenu";
 import Loading from "./app/screens/Loading";
 import Comments from "./app/components/Comments";
+import MovieContext from "./app/cotext/MovieContext";
 
 export default function App() {
   const [show_menu, set_show_menu] = useState(false);
@@ -25,6 +26,16 @@ export default function App() {
     upduration: "",
   });
   const [show_comment, set_show_comment] = useState(false);
+  const movie_context_value = {
+    movie_name,
+    set_movie_name,
+    movie_detail,
+    set_movie_detail,
+    show_detail,
+    set_show_detail,
+    show_comment,
+    set_show_comment,
+  }; //put multilayer states into context
 
   const readData = async () => {
     try {
@@ -61,16 +72,13 @@ export default function App() {
         set_show_search={set_show_search}
       ></SideMenu>
       {city_setting ? (
-        <MovieList
-          show_setting={show_setting}
-          city_setting={city_setting}
-          set_movie_detail={set_movie_detail}
-          set_show_detail={set_show_detail}
-          search_fields={search_fields}
-          set_search_fields={set_search_fields}
-          set_show_comment={set_show_comment}
-          set_comment_target={set_movie_name}
-        />
+        <MovieContext.Provider value={movie_context_value}>
+          <MovieList
+            city_setting={city_setting}
+            search_fields={search_fields}
+            set_search_fields={set_search_fields}
+          />
+        </MovieContext.Provider>
       ) : (
         <Loading />
       )}

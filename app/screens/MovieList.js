@@ -1,4 +1,10 @@
-import React, { Component, useEffect, useState, createContext } from "react";
+import React, {
+  Component,
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+} from "react";
 import {
   ScrollView,
   View,
@@ -16,6 +22,7 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import AppLink from "react-native-app-link";
 import Collapsible from "react-native-collapsible";
+import MovieContext from "../cotext/MovieContext";
 
 export default function MovieList(props) {
   const data_list = [
@@ -90,10 +97,6 @@ export default function MovieList(props) {
               ytlink={item.intro_video}
               intro={item.intro}
               imdb={item.imdb}
-              set_movie_detail={props.set_movie_detail}
-              set_show_detail={props.set_show_detail}
-              set_show_comment={props.set_show_comment}
-              set_comment_target={props.set_comment_target}
               name={item.name}
             />
           </View>
@@ -180,104 +183,110 @@ class TimeList extends Component {
   }
 }
 
-class Rightbar extends Component {
-  state = {
-    showIMDb: false,
-  };
+function Rightbar(props) {
+  const [showIMDb, set_showIMDb] = useState(false);
+  var ytlink = props ? props.ytlink : "https://youtube.com";
+  var intro = props ? props.intro : "";
+  var imdb_score = props ? props.imdb : "?";
+  var score_number = isNaN(Number(imdb_score)) ? 0 : Number(imdb_score);
+  let score_color = "black";
+  const {
+    movie_name,
+    set_movie_name,
+    movie_detail,
+    set_movie_detail,
+    show_detail,
+    set_show_detail,
+    show_comment,
+    set_show_comment,
+  } = useContext(MovieContext);
 
-  render() {
-    var ytlink = this.props ? this.props.ytlink : "https://youtube.com";
-    var intro = this.props ? this.props.intro : "";
-    var imdb_score = this.props ? this.props.imdb : "?";
-    var score_number = isNaN(Number(imdb_score)) ? 0 : Number(imdb_score);
-    let score_color = "black";
+  switch (true) {
+    case score_number >= 8:
+      score_color = "gold";
+      break;
+    case score_number >= 7:
+      score_color = "crimson";
+      break;
+    case score_number >= 6:
+      score_color = "forestgreen";
+      break;
+    case score_number >= 5:
+      score_color = "deepskyblue";
+      break;
+    default:
+      break;
+  }
 
-    switch (true) {
-      case score_number >= 8:
-        score_color = "gold";
-        break;
-      case score_number >= 7:
-        score_color = "crimson";
-        break;
-      case score_number >= 6:
-        score_color = "forestgreen";
-        break;
-      case score_number >= 5:
-        score_color = "deepskyblue";
-        break;
-      default:
-        break;
-    }
-
-    return (
-      <View style={styles.rightbar}>
-        <Icon
-          name="youtube"
-          size={40}
-          color="red"
-          style={styles.icon}
-          onPress={
-            () =>
-              AppLink.maybeOpenURL(ytlink, {
-                appName: "youtube",
-                appStoreId: "",
-                appStoreLocale: "",
-                playStoreId: "",
-              })
-            /*.then(() => {
+  return (
+    <View style={styles.rightbar}>
+      <Icon
+        name="youtube"
+        size={40}
+        color="red"
+        style={styles.icon}
+        onPress={
+          () =>
+            AppLink.maybeOpenURL(ytlink, {
+              appName: "youtube",
+              appStoreId: "",
+              appStoreLocale: "",
+              playStoreId: "",
+            })
+          /*.then(() => {
                 console.log("url found");
               })
               .catch((err) => {
                 console.log("error app not installed");
               })*/
-          }
-        />
-        <MaterialIcon
-          name="chat-bubble-outline"
-          size={40}
-          style={styles.icon}
-          onPress={() => {
-            this.props.set_comment_target(this.props.name);
-            this.props.set_show_comment(true);
-          }}
-        />
-        {!this.state.showIMDb ? (
-          <Icon
-            name="imdb"
-            size={40}
-            color="lightcoral"
-            style={styles.icon}
-            onPress={() => {
-              this.setState({ showIMDb: true });
-            }}
-          />
-        ) : (
-          <TouchableOpacity
-            style={styles.imdb_container}
-            onPress={() => {
-              this.setState({ showIMDb: false });
-            }}
-          >
-            <FontAwesome
-              name="square"
-              size={43}
-              color={score_color}
-              style={styles.icon}
-            />
-            <Text style={styles.score}>{imdb_score}</Text>
-          </TouchableOpacity>
-        )}
+        }
+      />
+      <MaterialIcon
+        name="chat-bubble-outline"
+        size={40}
+        style={styles.icon}
+        onPress={() => {
+          //this.props.set_comment_target(this.props.name);
+          set_movie_name(props.name);
+          set_show_comment(true);
+        }}
+      />
+      {!showIMDb ? (
         <Icon
-          name="readme"
-          size={35}
-          color="black"
+          name="imdb"
+          size={40}
+          color="lightcoral"
           style={styles.icon}
           onPress={() => {
-            this.props.set_movie_detail(intro);
-            this.props.set_show_detail(true);
+            set_showIMDb(true);
           }}
         />
-      </View>
-    );
-  }
+      ) : (
+        <TouchableOpacity
+          style={styles.imdb_container}
+          onPress={() => {
+            set_showIMDb(false);
+          }}
+        >
+          <FontAwesome
+            name="square"
+            size={43}
+            color={score_color}
+            style={styles.icon}
+          />
+          <Text style={styles.score}>{imdb_score}</Text>
+        </TouchableOpacity>
+      )}
+      <Icon
+        name="readme"
+        size={35}
+        color="black"
+        style={styles.icon}
+        onPress={() => {
+          set_movie_detail(intro);
+          set_show_detail(true);
+        }}
+      />
+    </View>
+  );
 }

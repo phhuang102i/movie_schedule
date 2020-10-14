@@ -1,4 +1,4 @@
-const { createContext } = require("react");
+import React, { createContext } from "react";
 
 const movienameInitState = { movie_name: "" };
 const ContextStore = createContext({

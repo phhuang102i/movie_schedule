@@ -8,6 +8,7 @@ import Dialog, {
 } from "react-native-popup-dialog";
 import styles from "../styles/PopupStyle";
 import { ContextStore } from "../screens/MovieList";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Comments(props) {
   const [comment_data, set_comment_data] = useState(null);
@@ -40,7 +41,7 @@ export default function Comments(props) {
   }
   useEffect(() => {
     getcommentlist(props.movie_name, currentpage);
-  }, [props.movie_name]);
+  }, [props.movie_name, currentpage]);
 
   const data = comment_data ? comment_data.results : [];
   const totalpages = comment_data ? Math.ceil(comment_data.count / 10) : 0;
@@ -63,12 +64,20 @@ export default function Comments(props) {
       dialogTitle={<DialogTitle title="影評/電影心得" />}
       onTouchOutside={() => {
         props.set_show_comment(false);
+        set_currentpage(1);
       }}
       onHardwareBackPress={() => {
         props.set_show_comment(false);
+        set_currentpage(1);
         return true;
       }}
-      footer={<Paging totalpages={totalpages} currentpage={currentpage} />}
+      footer={
+        <Paging
+          totalpages={totalpages}
+          currentpage={currentpage}
+          set_currentpage={set_currentpage}
+        />
+      }
     >
       <DialogContent>
         <ScrollView>{comment_list}</ScrollView>
@@ -81,9 +90,15 @@ function Paging(props) {
   let page_boxes = [];
   for (let i = 1; i <= props.totalpages; i++) {
     page_boxes.push(
-      <View style={styles.page_box} key={"page_" + i}>
+      <TouchableOpacity
+        style={styles.page_box}
+        key={"page_" + i}
+        onPress={() => {
+          props.set_currentpage(i);
+        }}
+      >
         <Text style={styles.page_text}>{i}</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 
