@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState, useContext } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Linking } from "react-native";
 import Dialog, {
   DialogContent,
   DialogTitle,
@@ -51,7 +51,21 @@ export default function Comments(props) {
     comment_list.push(
       <View style={styles.comment_row} key={data[i].link}>
         <Text style={styles.comment_link_from}>PTT</Text>
-        <Text style={styles.comment_link_title}>{data[i].title}</Text>
+        <Text
+          style={styles.comment_link_title}
+          onPress={() => {
+            Linking.openURL("http://" + data[i].link);
+          }}
+        >
+          {data[i].title}
+        </Text>
+      </View>
+    );
+  }
+  if (comment_list.length == 0) {
+    comment_list.push(
+      <View style={styles.nocomment}>
+        <Text style={styles.nocomment_text}>這部片還沒有心得/文章喔~ </Text>
       </View>
     );
   }
@@ -89,17 +103,27 @@ export default function Comments(props) {
 function Paging(props) {
   let page_boxes = [];
   for (let i = 1; i <= props.totalpages; i++) {
-    page_boxes.push(
-      <TouchableOpacity
-        style={styles.page_box}
-        key={"page_" + i}
-        onPress={() => {
-          props.set_currentpage(i);
-        }}
-      >
-        <Text style={styles.page_text}>{i}</Text>
-      </TouchableOpacity>
-    );
+    if (props.currentpage == i) {
+      page_boxes.push(
+        <TouchableOpacity style={styles.page_box} key={"page_" + i}>
+          <Text style={[styles.page_text, { textDecorationLine: "underline" }]}>
+            {i}
+          </Text>
+        </TouchableOpacity>
+      );
+    } else {
+      page_boxes.push(
+        <TouchableOpacity
+          style={styles.page_box}
+          key={"page_" + i}
+          onPress={() => {
+            props.set_currentpage(i);
+          }}
+        >
+          <Text style={styles.page_text}>{i}</Text>
+        </TouchableOpacity>
+      );
+    }
   }
 
   return <View style={styles.comment_paging_container}>{page_boxes}</View>;

@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   timelistdropdown: {
     width: "100%",
-    height: 25,
+    height: 40,
     backgroundColor: "linen",
     flexDirection: "row",
     alignItems: "center",

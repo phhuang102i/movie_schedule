@@ -9,8 +9,15 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "80%",
   },
+  detail_title: {
+    paddingTop: 10,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   detail_text: {
-    paddingVertical: 50,
+    paddingTop: 20,
+    paddingBottom: 50,
     fontSize: 20,
   },
 
@@ -97,6 +104,16 @@ const styles = StyleSheet.create({
   page_text: {
     fontWeight: "500",
     fontSize: 20,
+  },
+  nocomment: {
+    height: 45,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 50,
+  },
+  nocomment_text: {
+    fontWeight: "500",
+    fontSize: 15,
   },
 });
 export default styles;

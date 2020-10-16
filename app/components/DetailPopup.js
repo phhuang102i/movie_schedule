@@ -10,6 +10,9 @@ import styles from "../styles/PopupStyle";
 import SelectPicker from "react-native-form-select-picker";
 
 export default function DetailPopup(props) {
+  const movie_detail = props.movie_detail
+    ? props.movie_detail
+    : { title: "資料載入失敗", detail: "" };
   return (
     <Dialog
       visible={props.show_detail}
@@ -25,7 +28,8 @@ export default function DetailPopup(props) {
     >
       <DialogContent>
         <ScrollView>
-          <Text style={styles.detail_text}>{props.movie_detail}</Text>
+          <Text style={styles.detail_title}>{props.movie_detail.title}</Text>
+          <Text style={styles.detail_text}>{props.movie_detail.detail}</Text>
         </ScrollView>
       </DialogContent>
     </Dialog>

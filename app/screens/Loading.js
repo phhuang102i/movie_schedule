@@ -2,7 +2,6 @@ import React, { Component, useEffect, useState } from "react";
 import { View, Image, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
-import images from "../assets/image";
 
 export default function Loading(props) {
   const imageurl = "../assets/icon.png";

@@ -13,9 +13,9 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import styles from "../styles/ListStyle";
-import images from "../assets/image";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
@@ -25,12 +25,6 @@ import Collapsible from "react-native-collapsible";
 import MovieContext from "../cotext/MovieContext";
 
 export default function MovieList(props) {
-  const data_list = [
-    { image: images.p1 },
-    { image: images.p2 },
-    { image: images.p3 },
-    { image: images.p4 },
-  ];
   const [data, setData] = useState(0);
   const flatListRef = React.useRef();
   const ScrollToTop = () => {
@@ -92,7 +86,11 @@ export default function MovieList(props) {
       renderItem={({ item, index }) => (
         <View style={styles.movieobj_container}>
           <View style={styles.movie_and_bar}>
-            <MoviePic imageurl={item.image_url} key={index} />
+            <MoviePic
+              imageurl={item.image_url}
+              key={index}
+              movie_name={item.name}
+            />
             <Rightbar
               ytlink={item.intro_video}
               intro={item.intro}
@@ -112,7 +110,12 @@ class MoviePic extends Component {
   state = {};
   render() {
     const imageurl = "http://mvschedule.tk:55/static/" + this.props.imageurl;
-    return <Image source={{ uri: imageurl }} style={styles.pic_container} />;
+    return (
+      <ImageBackground
+        source={{ uri: imageurl }}
+        style={styles.pic_container}
+      ></ImageBackground>
+    );
   }
 }
 
@@ -186,6 +189,7 @@ class TimeList extends Component {
 function Rightbar(props) {
   const [showIMDb, set_showIMDb] = useState(false);
   var ytlink = props ? props.ytlink : "https://youtube.com";
+  var name = props ? props.name : "";
   var intro = props ? props.intro : "";
   var imdb_score = props ? props.imdb : "?";
   var score_number = isNaN(Number(imdb_score)) ? 0 : Number(imdb_score);
@@ -247,7 +251,7 @@ function Rightbar(props) {
         style={styles.icon}
         onPress={() => {
           //this.props.set_comment_target(this.props.name);
-          set_movie_name(props.name);
+          set_movie_name(name);
           set_show_comment(true);
         }}
       />
@@ -283,7 +287,7 @@ function Rightbar(props) {
         color="black"
         style={styles.icon}
         onPress={() => {
-          set_movie_detail(intro);
+          set_movie_detail({ title: name, detail: intro });
           set_show_detail(true);
         }}
       />
